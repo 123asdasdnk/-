@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>像素风格的 Hello World</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+        }
+
+        .pixel-art {
+            font-family: 'Press Start 2P', cursive;
+            /* 使用像素风格字体 */
+            font-size: 2em;
+            color: #ffcc00;
+            text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000;
+        }
+    </style>
+    <!-- 引入 Google Fonts 中的 Press Start 2P 像素字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <p class="pixel-art">Hello World</p>
+    
+</body>
+
+</html>

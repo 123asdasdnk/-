@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Planet</title>
+    <!-- 引入阿里巴巴图标库symbol引入 -->
+    <script src="./font/iconfont.js"></script>
+    <!-- 引入 Google Fonts 中的 Press Start 2P 像素字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="icon" href="./static/img/像素_游戏机.png">
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        body {
+            background-image: url(./static/wallhaven/4.png);
+            background-color: #f0f0f0;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .Main-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .contribution-map {
+            width: 60%;
+            background: rgba(24, 24, 24, 0.7);
+            /* 提高不透明度 */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            /* 设置阴影 */
+            backdrop-filter: blur(10px);
+            /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(10px);
+            /* 兼容Safari浏览器 */
+            border-radius: 15px;
+            /* 设置圆角 */
+            padding: 20px;
+            /* 设置内边距 */
+            margin: 20px;
+            /* 设置外边距 */
+            font-weight: bold;
+            /* 设置文本为粗体 */
+            text-align: center;
+            /* 使文本居中 */
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+            /* 头像旋转 */
+            animation: rotateAnimation 0.5s ease-in-out 3ms 1;
+        }
+
+        /* 头像旋转 */
+        @keyframes rotateAnimation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-360deg);
+                /* 逆时针旋转 */
+            }
+        }
+
+        @keyframes rotateClockwise {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+                /* 顺时针旋转 */
+            }
+        }
+
+        /* 鼠标移动到头像就旋转 */
+        .person-profile img:hover {
+            animation-play-state: running;
+            animation-name: rotateClockwise;
+        }
+
+        /* 个人信息样式 */
+        .person-profile {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            color: #000;
+        }
+
+        .person-profile h1 {
+            margin: 0.5rem 0;
+            font-size: 2rem;
+            color: #c3d0d6;
+        }
+
+        .person-profile p {
+            margin: 0.5rem 0;
+            color: #eaf7f2;
+        }
+
+        .links {
+            margin-top: 15px;
+        }
+
+        .links a {
+            color: #2a5640;
+            text-decoration: none;
+
+        }
+
+
+
+        .pic1 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 179px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+
+        }
+
+        .pic2 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 179px;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+        }
+
+        .pic3 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 95%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+        }
+
+        .pic4 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 80px;
+            left: 5%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+        }
+
+        .pic5 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 100px;
+            left: 90%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+            /* 翻转 */
+            transform: rotateY(180deg);
+
+        }
+
+        .pic6 {
+
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 179px;
+            left: 35%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            /* 确保像素人物在贡献图之上 */
+
+            animation: moveGhost 5s infinite alternate linear;
+        }
+
+        @keyframes moveGhost {
+            0% {
+                left: 35%;
+            }
+
+            100% {
+                left: 12%;
+
+                /* 转向 */
+            }
+        }
+
+
+        .pixel-art {
+            font-family: 'Press Start 2P', cursive;
+            /* 使用像素风格字体 */
+
+
+            text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, -1px -1px 0px #000;
+        }
+
+        .card {
+            float: left;
+            background: rgba(255, 255, 255, 0.1);
+            /* 半透明背景 */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            /* 阴影 */
+            backdrop-filter: blur(10px);
+            /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(10px);
+            /* 兼容Safari */
+            border-radius: 15px;
+            /* 圆角 */
+            padding: 20px;
+            /* 内边距 */
+            margin: 5px;
+            /* 外边距 */
+            width: 120px;
+            height: 30px;
+
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            /* 半透明背景 */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            /* 阴影 */
+            backdrop-filter: blur(10px);
+            /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(10px);
+            /* 兼容Safari */
+            border-radius: 15px;
+            /* 圆角 */
+            padding: 20px;
+            /* 内边距 */
+            margin: 10px;
+            /* 外边距 */
+
+            /* 自适应宽度 */
+            position: absolute;
+            top: 50%;
+            left: 40.5%;
+            width: 700px;
+            /* height: 200px; */
+            text-align: center;
+        }
+
+
+
+        .styled-span {
+            text-align: center;
+            /* font-family: 'Press Start 2P', cursive; */
+            /* 像素风格字体 */
+            font-size: 20px;
+            /* 字体大小 */
+            color: rgba(255, 255, 255, 0.5);
+            /* 字体颜色 */
+
+            /* 与图标间的间距*/
+        }
+
+        .card:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 弹出框 */
+        .greeting-overlay {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -10%);
+            background-color: rgba(24, 24, 24, 0.5);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 15%;
+            height: 30px;
+            padding: 10px;
+            animation: fadeIn 1s ease-out, fadeOut 2s 3s forwards;
+            /* 添加淡出动画 */
+            z-index: 9999;
+        }
+
+        .greeting-box h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .voicebutton,
+        .quitebutton {
+            background-color: transparent;
+            /*设置背景为透明*/
+            border: none;
+            /* 去掉默认的边框 */
+            cursor: pointer;
+            /* 鼠标悬停时显示手型光标 */
+            padding: 10px;
+            /* 增加按钮的内边距 */
+            margin: 5px;
+            /* 增加按钮之间的间距 */
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 隐藏音频控件 -->
+    <audio id="backgroundAudio" class="hidden-audio" autoplay>
+        <source src="./audio/近藤浩治 - Super Mario Bros. (スーパーマリオブラザーズ).mp3" type="audio/mpeg">你的浏览器不支持音频播放，请使用更新的浏览器。
+    </audio>
+
+    <div class="voice">
+        <button class="voicebutton" style="display: none;">
+            <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                <use xlink:href="#icon-yinliang"></use>
+            </svg>
+        </button>
+        <button class="quitebutton">
+            <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                <use xlink:href="#icon-24gl-volumeCross"></use>
+            </svg>
+        </button>
+    </div>
+
+    <div class="Main-container">
+
+        <div class="person-profile">
+            <div class="avatar">
+                <img class="profile-img" src="./static/component/avatar_1668591559.webp" alt="个人头像" />
+            </div>
+
+            <h1 class="pixel-art" style="color: blueviolet;">Pixel Peak</h1>
+            <p style="font-family: 'Press Start 2P', cursive; font-size: 12px;">Developer | Pixel Enthusiast</p>
+            <p class="pixel-art" style="color: #2a5640; font-size: 15px;"> 👽 >_ Hello World 😁</p>
+            <div class="links">
+                <a href="https://space.bilibili.com/520378629?spm_id_from=333.999.0.0">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                        <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                </a>
+
+                <a href="https://github.com/123asdasdnk">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                </a>
+
+                <a href="https://im.qq.com">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                        <use xlink:href="#icon-QQ"></use>
+                    </svg>
+                </a>
+
+                <a href="https://weixin.qq.com/">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                        <use xlink:href="#icon-weixin"></use>
+                    </svg>
+                </a>
+
+                <a href="https://music.163.com/">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 20px">
+                        <use xlink:href="#icon-wangyiyunyinleclick"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <img class="pic1" src="./static/component/ラッパー.png" alt="马里奥">
+        <img class="pic2" src="./static/component/サッカーをしている子.png" alt="小孩2">
+        <img class="pic3" src="./static/component/地球.png" alt="地球">
+        <img class="pic4" src="./static/component/惑星.png" alt="行星">
+        <img class="pic5" src="./static/component/白い服の宇宙飛行士.png" alt="宇航员">
+        <img class="pic6" src="./static/component/おばけ.png" alt="鬼">
+        <!-- github贡献图 -->
+        <div class="contribution-map">
+            <!-- 苹果绿:9DC92A 绿琉璃: 01795D 绿色: 00A664 黄丹:F2792A  马尔斯绿: 01847E 皇家紫: 7F1181 布鲁斯蓝: 125FA3-->
+            <img src="https://ghchart.rshah.org/F2792A/123asdasdnk" alt="123asdasdnk's Github chart" />
+        </div>
+        <div class="glass-card">
+            <!-- target="_blank" 创建一个新窗口 -->
+            <a href="file:///C:/Users/22448/Desktop/项目合集/前端小项目/个人主页(新)/index.html">
+                <div class="card">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 25px;">
+                        <use xlink:href="#icon-zhuye"></use>
+                    </svg>
+                    <span class="styled-span">主页</span>
+                </div>
+            </a>
+
+            <a href="https://123asdasdnk.github.io/" target="_blank">
+                <div class="card">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 25px;">
+                        <use xlink:href="#icon-daohang"></use>
+                    </svg>
+                    <span class="styled-span">博客</span>
+                </div>
+            </a>
+
+            <a href="https://music.163.com/" target="_blank">
+                <div class="card">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 25px;">
+                        <use xlink:href="#icon-wangyiyunyinleclick"></use>
+                    </svg>
+                    <span class="styled-span">音乐</span>
+                </div>
+            </a>
+
+            <a href="https://www.bilibili.com/" target="_blank">
+                <div class="card">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 25px;">
+                        <use xlink:href="#icon-bilibili"></use>
+                    </svg>
+                    <span class="styled-span">B站</span>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="card">
+                    <svg class="icon" aria-hidden="true" style="background-color: transparent; font-size: 25px;">
+                        <use xlink:href="#icon-gengduo"></use>
+                    </svg>
+                    <span class="styled-span">研发中...</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+<script>
+    //鬼移动翻转
+    const ghost = document.querySelector('.pic6');
+    let movingRight = true;
+    ghost.addEventListener('animationiteration', function () {
+        if (movingRight) {
+            ghost.style.transform = 'translate(-50%, -50%) rotateY(180deg)';
+        } else {
+            ghost.style.transform = 'translate(-50%, -50%) rotateY(0deg)';
+        }
+        movingRight = !movingRight;
+    });
+
+
+    //弹出框
+    function alterText(text) {
+        var greetingOverlay = document.createElement('div');
+        greetingOverlay.className = 'greeting-overlay';
+
+        var greetingBox = document.createElement('div');
+        greetingBox.className = 'greeting-box';
+
+        var greetingText = document.createElement('h1');
+        greetingText.textContent = text;
+
+
+        greetingBox.appendChild(greetingText);
+
+        greetingOverlay.appendChild(greetingBox);
+        document.body.appendChild(greetingOverlay);
+
+        // 2秒后自动移除提示框
+        setTimeout(function () {
+            document.body.removeChild(greetingOverlay);
+        }, 5000); // 3秒后开始fadeOut动画，动画持续2秒，总共5秒后移除
+    }
+
+    //打招呼
+    window.onload = function () {
+        var now = new Date();
+        var hours = now.getHours();
+        var greeting;
+
+        if (hours >= 6 && hours < 12) {
+            greeting = "🌻早上好！🐓";
+        } else if (hours >= 12 && hours < 18) {
+            greeting = "🌞下午好！";
+        } else if (hours >= 18 && hours < 24) {
+            greeting = "🌜晚上好💤！⭐";
+        } else {
+            greeting = "🌚凌晨好！👻";
+        }
+
+        alterText(greeting);
+    };
+
+
+    // 禁止缩放 
+    let alertShown = false;
+
+    function disableCtrlScroll(e) {
+        if (e.ctrlKey && (e.key === '0' || e.key === 'n' || e.key === 'N' || e.key === '+' || e.key === '=' || e.key === '-')) {
+            e.preventDefault();
+            if (!alertShown) {
+                alterText("本网站禁止缩放😚");
+                alertShown = true;
+                setTimeout(() => {
+                    alertShown = false;
+                }, 5000); // 在2秒后重置标志
+            }
+        }
+    }
+
+    function disableWheelZoom(e) {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            if (!alertShown) {
+                alterText("本网站禁止缩放😚");
+                alertShown = true;
+                setTimeout(() => {
+                    alertShown = false;
+                }, 5000); // 在2秒后重置标志
+            }
+        }
+    }
+
+
+    window.addEventListener('keydown', disableCtrlScroll);
+    window.addEventListener('wheel', disableWheelZoom, { passive: false });
+
+    //禁用F12
+    // let alertShown2 = false;
+
+    // document.onkeydown = function (e) {
+    //     if (e.key === "F12" || (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || (e.ctrlKey && e.key === "U")) {
+    //         if (!alertShown2) {
+    //             alterText("本网站禁止F12😚");
+    //             alertShown2 = true;
+    //             setTimeout(() => {
+    //                 alertShown2 = false;
+    //             }, 5000); // 在2秒后重置标志
+    //         }
+    //         return false;
+    //     }
+    // };
+    // 进一步防止右键点击
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        if (!alertShown2) {
+            alterText("本网站禁止右键😚");
+            alertShown2 = true;
+            setTimeout(() => {
+                alertShown2 = false;
+            }, 5000); // 在2秒后重置标志
+        }
+    })
+
+    //声音按钮相互切换
+
+    var audio = document.getElementById('backgroundAudio');
+
+    window.addEventListener('load', function() {
+          audio.play().catch(function(error) {
+             console.error('音频播放失败:', error);
+        }); 
+    });
+
+    document.querySelector('.voicebutton').addEventListener('click', function () {
+        audio.pause();
+        
+        document.querySelector('.voicebutton').style.display = 'none';
+        document.querySelector('.quitebutton').style.display = 'inline-block';
+    });
+
+    document.querySelector('.quitebutton').addEventListener('click', function () {
+        
+        audio.play().catch(function (error) {
+                    console.error('音频播放失败:', error);
+            });
+        document.querySelector('.quitebutton').style.display = 'none';
+        document.querySelector('.voicebutton').style.display = 'inline-block';
+    });
+
+    
+
+    
+
+     
+
+
+</script>
+
+</html>
