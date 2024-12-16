@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生HTML路由示例</title>
+    <style>
+        .content {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="content active">
+        <h1>Home Page</h1>
+        <p>欢迎来到主页！</p>
+    </div>
+    <div id="about" class="content">
+        <h1>About Page</h1>
+        <p>关于我们的信息。</p>
+    </div>
+    <div id="contact" class="content">
+        <h1>Contact Page</h1>
+        <p>联系方式。</p>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1); // 去掉'#'
+            showPage(hash);
+        });
+
+        // 初次加载页面时显示正确的内容
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1) || 'home';
+            showPage(hash);
+        });
+    </script>
+</body>
+</html>
